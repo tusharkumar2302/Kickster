@@ -10,11 +10,11 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen name="Home" component={HomeStack} />
-      <Tab.Screen name="Matches" component={MatchesStack} />
-      <Tab.Screen name="Schedule" component={ScheduleStack} />
-      <Tab.Screen name="News" component={NewsStack} />
-      <Tab.Screen name="Profile" component={ProfileStack} />
+      <Tab.Screen name="HomeTab" component={HomeStack} />
+      <Tab.Screen name="MatchesTab" component={MatchesStack} />
+      <Tab.Screen name="ScheduleTab" component={ScheduleStack} />
+      <Tab.Screen name="NewsTab" component={NewsStack} />
+      <Tab.Screen name="ProfileTab" component={ProfileStack} />
     </Tab.Navigator>
   );
 };

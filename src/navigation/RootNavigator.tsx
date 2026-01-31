@@ -1,12 +1,11 @@
-import React from 'react';
-import TabNavigator from './TabNavigator';
 import AuthNavigator from './AuthNavigator';
+import MainNavigator from './MainNavigator';
 
 const RootNavigator = () => {
   const isLoggedIn = false;
 
   if (isLoggedIn) {
-    return <TabNavigator />;
+    return <MainNavigator />;
   } else {
     return <AuthNavigator />;
   }
