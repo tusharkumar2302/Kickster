@@ -1,20 +1,59 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+import colors from '../../../theme/colors';
+import { fontFamily, fontSize } from '../../../theme/typography';
+import spacing from '../../../theme/spacing';
+import { STRINGS } from '../../../constants/strings';
 
 const SplashScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>SplashScreen</Text>
-    </View>
-  )
-}
+      <View style={styles.centerContent}>
+        <Text style={styles.heading}>{STRINGS.splash.heading}</Text>
 
-export default SplashScreen
+        <Text style={styles.subHeading}>{STRINGS.splash.subHeading}</Text>
+      </View>
+
+      <Text style={styles.version}>{STRINGS.splash.version}</Text>
+    </View>
+  );
+};
+
+export default SplashScreen;
 
 const styles = StyleSheet.create({
-container: {
+  container: {
+    flex: 1,
+    backgroundColor: colors.primary,
+  },
+
+  centerContent: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-}
-})
+    paddingHorizontal: spacing.xl,
+  },
+
+  heading: {
+    color: colors.white,
+    fontFamily: fontFamily.bold,
+    fontSize: fontSize.h2,
+  },
+
+  subHeading: {
+    marginTop: spacing.sm,
+    textAlign: 'center',
+    color: colors.white,
+    fontFamily: fontFamily.medium,
+    fontSize: fontSize.xl,
+  },
+
+  version: {
+    textAlign: 'center',
+    marginBottom: spacing.lg,
+    color: colors.white,
+    fontFamily: fontFamily.medium,
+    fontSize: fontSize.sm,
+  },
+});
