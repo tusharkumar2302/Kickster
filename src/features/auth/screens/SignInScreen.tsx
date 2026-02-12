@@ -14,10 +14,8 @@ import spacing from '../../../theme/spacing';
 import { fontFamily, fontSize } from '../../../theme/typography';
 import { useNavigation } from '@react-navigation/native';
 
-const SignupScreen = () => {
-
+const SignInScreen = () => {
   const navigation = useNavigation();
-
   const [email, setEmail] = useState('');
 
   return (
@@ -26,7 +24,7 @@ const SignupScreen = () => {
         {/* Header */}
         <View style={styles.headerWrapper}>
           <View style={styles.header}>
-            <Text style={styles.title}>Create account</Text>
+            <Text style={styles.title}>Hi, Welcome Back! 👋</Text>
             <Text style={styles.subtitle}>Lorem ipsum dolor sit amet</Text>
           </View>
         </View>
@@ -40,14 +38,14 @@ const SignupScreen = () => {
             onChangeText={setEmail}
             placeholder="Enter your email address"
             placeholderTextColor={colors.grayscale[60]}
-            keyboardType="email-address"
             style={styles.input}
           />
 
-          <Pressable style={styles.primaryButton} onPress={() => navigation.navigate('SignUpForm')}>
-            <Text style={styles.primaryButtonText}>
-              Continue with Email
-            </Text>
+          <Pressable
+            style={styles.primaryButton}
+            onPress={() => navigation.navigate('SignInWithEmail')}
+          >
+            <Text style={styles.primaryButtonText}>Continue with Email</Text>
           </Pressable>
 
           {/* Divider */}
@@ -76,18 +74,18 @@ const SignupScreen = () => {
           </Pressable>
 
           {/* Footer */}
-          <Text style={styles.footer}>
-            Already have an account?{' '}
-            <Text style={styles.link}>Login</Text>
-          </Text>
+          <Pressable onPress={() => navigation.navigate('SignUp')}>
+            <Text style={styles.footer}>
+              Don’t have an account? <Text style={styles.link}>Sign Up</Text>
+            </Text>
+          </Pressable>
         </View>
       </View>
     </SafeAreaView>
   );
 };
 
-export default SignupScreen;
-
+export default SignInScreen;
 
 const styles = StyleSheet.create({
   safe: {
@@ -100,13 +98,15 @@ const styles = StyleSheet.create({
   },
 
   headerWrapper: {
-    height: 240,
     backgroundColor: colors.primary,
+    height: 220,
     justifyContent: 'center',
   },
 
   header: {
     paddingHorizontal: spacing.xl,
+    paddingTop: spacing.vertical.lg,
+    paddingBottom: spacing.xl,
   },
 
   title: {
@@ -149,15 +149,14 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.regular,
     fontSize: fontSize.md,
     color: colors.black,
-    marginBottom: spacing.lg,
   },
 
   primaryButton: {
+    marginTop: spacing.lg,
     backgroundColor: colors.primary,
     paddingVertical: spacing.md,
     borderRadius: 32,
     alignItems: 'center',
-    marginBottom: spacing.lg,
   },
 
   primaryButtonText: {

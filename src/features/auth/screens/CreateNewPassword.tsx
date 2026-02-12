@@ -13,9 +13,12 @@ import colors from '../../../theme/colors';
 import spacing from '../../../theme/spacing';
 import { fontFamily, fontSize } from '../../../theme/typography';
 
-const ForgotPasswordScreen = () => {
+const CreateNewPasswordScreen = () => {
   const navigation = useNavigation();
-  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [secure1, setSecure1] = useState(true);
+  const [secure2, setSecure2] = useState(true);
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -26,20 +29,46 @@ const ForgotPasswordScreen = () => {
 
       {/* Content */}
       <View style={styles.content}>
-        <Text style={styles.title}>Forgot Password</Text>
-        <Text style={styles.subtitle}>Recover your account password</Text>
+        <Text style={styles.title}>Create a{'\n'}New Password</Text>
+        <Text style={styles.subtitle}>Enter your new password</Text>
 
-        <Text style={styles.label}>E-mail</Text>
-        <TextInput
-          value={email}
-          onChangeText={setEmail}
-          placeholder="Enter your email"
-          placeholderTextColor={colors.grayscale[60]}
-          keyboardType="email-address"
-          style={styles.input}
-        />
+        {/* New Password */}
+        <Text style={styles.label}>New Password</Text>
+        <View style={styles.inputWrapper}>
+          <TextInput
+            value={password}
+            onChangeText={setPassword}
+            placeholder="Enter new password"
+            placeholderTextColor={colors.grayscale[60]}
+            secureTextEntry={secure1}
+            style={styles.input}
+          />
+          <Pressable onPress={() => setSecure1(!secure1)}>
+            <Text style={styles.eye}>👁</Text>
+          </Pressable>
+        </View>
 
-        <Pressable style={styles.button} onPress={()=> navigation.navigate('CreateNewPassword')}>
+        {/* Confirm Password */}
+        <Text style={styles.label}>Confirm Password</Text>
+        <View style={styles.inputWrapper}>
+          <TextInput
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            placeholder="Confirm your password"
+            placeholderTextColor={colors.grayscale[60]}
+            secureTextEntry={secure2}
+            style={styles.input}
+          />
+          <Pressable onPress={() => setSecure2(!secure2)}>
+            <Text style={styles.eye}>👁</Text>
+          </Pressable>
+        </View>
+
+        {/* Button */}
+        <Pressable
+          style={styles.button}
+          onPress={() => navigation.navigate('SelectLanguage')}
+        >
           <Text style={styles.buttonText}>Continue</Text>
         </Pressable>
       </View>
@@ -47,7 +76,7 @@ const ForgotPasswordScreen = () => {
   );
 };
 
-export default ForgotPasswordScreen;
+export default CreateNewPasswordScreen;
 
 const styles = StyleSheet.create({
   safe: {
@@ -82,6 +111,7 @@ const styles = StyleSheet.create({
     fontSize: fontSize.h4,
     color: colors.black,
     textAlign: 'center',
+    lineHeight: fontSize.h4 + 6,
   },
 
   subtitle: {
@@ -100,15 +130,26 @@ const styles = StyleSheet.create({
     color: colors.grayscale[80],
   },
 
-  input: {
+  inputWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
     borderWidth: 1,
     borderColor: colors.line,
     borderRadius: 28,
-    paddingVertical: spacing.md,
     paddingHorizontal: spacing.lg,
+  },
+
+  input: {
+    flex: 1,
+    paddingVertical: spacing.md,
     fontFamily: fontFamily.regular,
     fontSize: fontSize.md,
     color: colors.black,
+  },
+
+  eye: {
+    fontSize: 18,
+    color: colors.grayscale[70],
   },
 
   button: {

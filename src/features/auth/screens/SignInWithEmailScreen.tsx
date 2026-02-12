@@ -14,27 +14,28 @@ import spacing from '../../../theme/spacing';
 import { fontFamily, fontSize } from '../../../theme/typography';
 import { useNavigation } from '@react-navigation/native';
 
-const SignupScreen = () => {
-
+const SignInWithEmailScreen = () => {
   const navigation = useNavigation();
 
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [secure, setSecure] = useState(true);
 
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.container}>
         {/* Header */}
-        <View style={styles.headerWrapper}>
-          <View style={styles.header}>
-            <Text style={styles.title}>Create account</Text>
-            <Text style={styles.subtitle}>Lorem ipsum dolor sit amet</Text>
-          </View>
+        <View style={styles.header}>
+          <Pressable style={styles.backButton}>
+            <Text style={styles.backIcon}>←</Text>
+          </Pressable>
+
+          <Text style={styles.headerTitle}>Sign In</Text>
         </View>
 
-        {/* Card */}
-        <View style={styles.card}>
-          <Text style={styles.label}>Email</Text>
-
+        {/* Form */}
+        <View style={styles.form}>
+          <Text style={styles.label}>Email Address</Text>
           <TextInput
             value={email}
             onChangeText={setEmail}
@@ -44,10 +45,31 @@ const SignupScreen = () => {
             style={styles.input}
           />
 
-          <Pressable style={styles.primaryButton} onPress={() => navigation.navigate('SignUpForm')}>
-            <Text style={styles.primaryButtonText}>
-              Continue with Email
-            </Text>
+          <Text style={styles.label}>Password</Text>
+          <View style={styles.passwordWrapper}>
+            <TextInput
+              value={password}
+              onChangeText={setPassword}
+              placeholder="Enter your password"
+              placeholderTextColor={colors.grayscale[60]}
+              secureTextEntry={secure}
+              style={styles.passwordInput}
+            />
+            <Pressable onPress={() => setSecure(!secure)}>
+              <Text style={styles.eye}>👁</Text>
+            </Pressable>
+          </View>
+
+          <View style={styles.row}>
+            <Text style={styles.remember}>◯ Remember Me</Text>
+
+            <Pressable onPress={() => navigation.navigate('ForgotPassword')}>
+              <Text style={styles.forgot}>Forgot Password</Text>
+            </Pressable>
+          </View>
+
+          <Pressable style={styles.primaryButton}>
+            <Text style={styles.primaryButtonText}>Sign In</Text>
           </Pressable>
 
           {/* Divider */}
@@ -76,18 +98,18 @@ const SignupScreen = () => {
           </Pressable>
 
           {/* Footer */}
-          <Text style={styles.footer}>
-            Already have an account?{' '}
-            <Text style={styles.link}>Login</Text>
-          </Text>
+          <Pressable onPress={() => navigation.navigate('SignUp')}>
+            <Text style={styles.footer}>
+              Don’t have an account? <Text style={styles.link}>Sign Up</Text>
+            </Text>
+          </Pressable>
         </View>
       </View>
     </SafeAreaView>
   );
 };
 
-export default SignupScreen;
-
+export default SignInWithEmailScreen;
 
 const styles = StyleSheet.create({
   safe: {
@@ -97,47 +119,48 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-  },
-
-  headerWrapper: {
-    height: 240,
-    backgroundColor: colors.primary,
-    justifyContent: 'center',
+    backgroundColor: colors.white,
   },
 
   header: {
-    paddingHorizontal: spacing.xl,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: spacing.lg,
   },
 
-  title: {
-    fontFamily: fontFamily.bold,
+  backButton: {
+    position: 'absolute',
+    left: spacing.lg,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: colors.grayscale[20],
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  backIcon: {
+    fontSize: 18,
+    color: colors.black,
+  },
+
+  headerTitle: {
+    fontFamily: fontFamily.medium,
     fontSize: fontSize.h4,
-    color: colors.white,
+    color: colors.black,
     textAlign: 'center',
   },
 
-  subtitle: {
-    marginTop: spacing.sm,
-    fontFamily: fontFamily.regular,
-    fontSize: fontSize.md,
-    color: colors.grayscale[20],
-    textAlign: 'center',
-  },
-
-  card: {
-    flex: 1,
-    backgroundColor: colors.white,
-    borderTopLeftRadius: 32,
-    borderTopRightRadius: 32,
+  form: {
     padding: spacing.xl,
-    marginTop: -32,
   },
 
   label: {
     fontFamily: fontFamily.medium,
     fontSize: fontSize.md,
     color: colors.grayscale[80],
-    marginBottom: spacing.md,
+    marginBottom: spacing.sm,
   },
 
   input: {
@@ -148,8 +171,46 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     fontFamily: fontFamily.regular,
     fontSize: fontSize.md,
-    color: colors.black,
     marginBottom: spacing.lg,
+  },
+
+  passwordWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: colors.line,
+    borderRadius: 28,
+    paddingHorizontal: spacing.lg,
+    marginBottom: spacing.lg,
+  },
+
+  passwordInput: {
+    flex: 1,
+    paddingVertical: spacing.md,
+    fontFamily: fontFamily.regular,
+    fontSize: fontSize.md,
+  },
+
+  eye: {
+    fontSize: 18,
+  },
+
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: spacing.xl,
+  },
+
+  remember: {
+    fontFamily: fontFamily.regular,
+    fontSize: fontSize.md,
+    color: colors.grayscale[80],
+  },
+
+  forgot: {
+    fontFamily: fontFamily.medium,
+    fontSize: fontSize.md,
+    color: colors.error,
   },
 
   primaryButton: {
@@ -157,7 +218,7 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.md,
     borderRadius: 32,
     alignItems: 'center',
-    marginBottom: spacing.lg,
+    marginBottom: spacing.xl,
   },
 
   primaryButtonText: {
@@ -169,7 +230,7 @@ const styles = StyleSheet.create({
   dividerRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: spacing.lg,
+    marginBottom: spacing.lg,
   },
 
   line: {
