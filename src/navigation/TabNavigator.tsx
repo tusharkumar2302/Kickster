@@ -11,9 +11,9 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen name="HomeTab" component={HomeStack} />
-      <Tab.Screen name="MatchesTab" component={MatchesStack} />
+      {/* <Tab.Screen name="MatchesTab" component={MatchesStack} />
       <Tab.Screen name="ScheduleTab" component={ScheduleStack} />
-      <Tab.Screen name="NewsTab" component={NewsStack} />
+      <Tab.Screen name="NewsTab" component={NewsStack} /> */}
       <Tab.Screen name="ProfileTab" component={ProfileStack} />
     </Tab.Navigator>
   );

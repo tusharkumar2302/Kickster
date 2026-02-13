@@ -2,7 +2,7 @@ import AuthNavigator from './AuthNavigator';
 import MainNavigator from './MainNavigator';
 
 const RootNavigator = () => {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   if (isLoggedIn) {
     return <MainNavigator />;
