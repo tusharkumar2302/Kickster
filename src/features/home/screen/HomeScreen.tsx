@@ -1,5 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  SafeAreaView,
+  Pressable,
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import colors from '../../../theme/colors';
 import spacing from '../../../theme/spacing';
@@ -15,6 +23,8 @@ import SubscribeBanner from '../../../components/SubscribeBanner';
 import LatestNews from '../../../components/LatestNews';
 
 const HomeScreen = () => {
+  const navigation = useNavigation<any>();
+
   return (
     <SafeAreaView style={styles.safe}>
       <ScrollView
@@ -31,7 +41,14 @@ const HomeScreen = () => {
         <SportsTabs />
 
         {/* Live Matches */}
-        <SectionHeader title="Live Matches" />
+        <SectionHeader
+          title="Live Matches"
+          onPress={() =>
+            navigation.navigate('MatchesTab', {
+              screen: 'LiveMatches',
+            })
+          }
+        />
         <LiveMatches />
 
         {/* Upcoming Matches */}
@@ -55,14 +72,29 @@ const HomeScreen = () => {
 
 export default HomeScreen;
 
-/* ---------- Small reusable header ---------- */
+/* ---------- Reusable Section Header ---------- */
 
-const SectionHeader = ({ title }: { title: string }) => (
-  <View style={styles.sectionHeader}>
-    <Text style={styles.sectionTitle}>{title}</Text>
-    <Text style={styles.seeAll}>See All</Text>
-  </View>
-);
+const SectionHeader = ({
+  title,
+  onPress,
+}: {
+  title: string;
+  onPress?: () => void;
+}) => {
+  return (
+    <View style={styles.sectionHeader}>
+      <Text style={styles.sectionTitle}>{title}</Text>
+
+      {onPress ? (
+        <Pressable onPress={onPress}>
+          <Text style={styles.seeAll}>See All</Text>
+        </Pressable>
+      ) : (
+        <Text style={styles.seeAll}>See All</Text>
+      )}
+    </View>
+  );
+};
 
 /* ---------- Styles ---------- */
 

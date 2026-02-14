@@ -7,11 +7,6 @@ import { fontFamily, fontSize } from '../theme/typography';
 const LiveMatches = () => {
   return (
     <>
-      {/* <View style={styles.header}>
-        <Text style={styles.title}>Live Matches</Text>
-        <Text style={styles.link}>See All</Text>
-      </View> */}
-
       <View style={styles.card}>
         <Text style={styles.team}>N Forest</Text>
         <Text style={styles.score}>0 - 2</Text>
